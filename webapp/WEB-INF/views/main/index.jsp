@@ -66,9 +66,8 @@
 		<!-- //container -->
 		
 		
-
-			<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
-
+		<!-- //footer -->
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>

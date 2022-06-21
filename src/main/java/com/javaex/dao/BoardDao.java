@@ -7,14 +7,13 @@ import org.springframework.stereotype.Repository;
 import com.javaex.vo.BoardVo;
 
 @Repository
-public class GuestDao {
-
-	/*
-	 * @Autowired private SqlSession sqlSession;
-	 * 
-	 * public int guestInsert(BoardVo boardVo) { return
-	 * sqlSession.insert("guestbook.guestInsert", boardVo); }
-	 */
+public class BoardDao {
 	
+	@Autowired
+	private SqlSession sqlSession;
 	
+	public int write(BoardVo boardVo) {
+		return sqlSession.insert("boardwrite.write", boardVo);
+		
+	}
 }
