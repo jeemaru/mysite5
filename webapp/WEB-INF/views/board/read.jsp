@@ -22,16 +22,6 @@
 		<c:import url="/WEB-INF/views/includes/navigation.jsp"></c:import>
 		<!-- //nav -->
 
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
-			</ul>
-		</div>
-		<!-- //nav -->
-
 		<div id="container" class="clearfix">
 			<div id="aside">
 				<h2>게시판</h2>
@@ -58,35 +48,53 @@
 				<!-- //content-head -->
 	
 				<div id="board">
-					<div id="writeForm">
-						<form action="#" method="get">
+					<div id="read">
+						<form action="read" method="get">
+							<!-- 작성자 -->
+							<div class="form-group">
+								<span class="form-text">작성자</span>
+								<span class="form-value">${boardVo.name}</span>
+							</div>
+							
+							<!-- 조회수 -->
+							<div class="form-group">
+								<span class="form-text">조회수</span>
+								<span class="form-value">${boardVo.hit}</span>
+							</div>
+							
+							<!-- 작성일 -->
+							<div class="form-group">
+								<span class="form-text">작성일</span>
+								<span class="form-value">${boardVo.regDate}</span>
+							</div>
+							
 							<!-- 제목 -->
 							<div class="form-group">
-								<label class="form-text" for="txt-title">제목</label>
-								<input type="text" id="txt-title" name="" value="" placeholder="제목을 입력해 주세요">
+								<span class="form-text">제 목</span>
+								<span class="form-value">${boardVo.title}</span>
 							</div>
 						
 							<!-- 내용 -->
-							<div class="form-group">
-								<textarea id="txt-content"></textarea>
+							<div id="txt-content">
+								<span class="form-value" >
+									${boardVo.content}
+								</span>
 							</div>
 							
-							<a id="btn_cancel" href="">취소</a>
-							<button id="btn_add" type="submit" >등록</button>
+							<a id="btn_modify" href="">수정</a>
+							<a id="btn_modify" href="">목록</a>
 							
 						</form>
 						<!-- //form -->
 					</div>
-					<!-- //writeForm -->
+					<!-- //read -->
 				</div>
 				<!-- //board -->
 			</div>
 			<!-- //content  -->
 
-
 		</div>
 		<!-- //container  -->
-
 
 		<!-- //footer -->
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>

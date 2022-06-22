@@ -29,15 +29,34 @@
 	
 	<select id="getList" resultMap="resultMapBoardVo" >
 		<![CDATA[
-			select  no,
-					title,
-					name,
-					hit,
-					reg_date
-			from board
-			
-		]]>
+			select  b.no no,
+					b.user_no userNo,
+					b.title title,
+					b.hit hit,
+					b.reg_date regDate,
+					u.name name
+			from board b, users u
+			where b.user_no = u.no
+			order by b.no desc
+			]]>
 	</select>
+	
+	<select id="read" parameterType="int" resultMap="resultMapBoardVo" >
+		<![CDATA[
+			select  b.no no,
+					b.user_no userNo,
+					b.title title,
+					b.hit hit,
+					b.reg_date regDate,
+					u.name name,
+					b.content content
+			from board b, users u
+			where b.user_no = u.no
+			order by b.no desc
+			and b.no = #{no}
+			]]>
+	</select>
+	
 	
 	
 </mapper>

@@ -15,50 +15,56 @@ import com.javaex.vo.BoardVo;
 
 @Controller
 public class BoardController {
-	
+
 	@Autowired
 	private BoardService boardService;
-	
-	@RequestMapping(value="/list", method= {RequestMethod.GET, RequestMethod.POST})
-	public String list() {
+
+	@RequestMapping(value = "/list", method = { RequestMethod.GET, RequestMethod.POST })
+	public String list(Model model) {
 		System.out.println("BoardController.list");
-		
+
+		List<BoardVo> getlist = boardService.getList();
+
+		model.addAttribute("getList", getlist);
+
 		return "board/list";
 	}
-	
-	@RequestMapping(value="/writeForm", method= {RequestMethod.GET, RequestMethod.POST})
+
+	@RequestMapping(value = "/writeForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String writeForm() {
 		System.out.println("BoardController.writeForm");
 
 		return "board/writeForm";
 	}
-	
-	@RequestMapping(value="/write", method= {RequestMethod.GET, RequestMethod.POST})
+
+	@RequestMapping(value = "/write", method = { RequestMethod.GET, RequestMethod.POST })
 	public String write(@ModelAttribute BoardVo boardVo) {
 		System.out.println("BoardController.write");
-		
+
 		boardService.write(boardVo);
-		
+
 		return "redirect:list";
 	}
-	
-	@RequestMapping(value="/listDelete", method= {RequestMethod.GET,RequestMethod.POST})
-	public String listDelete(@RequestParam("no") int no){
+
+	@RequestMapping(value = "/listDelete", method = { RequestMethod.GET, RequestMethod.POST })
+	public String listDelete(@RequestParam("no") int no) {
 		System.out.println("BoardController.listDelete");
-		
+
 		boardService.listDelete(no);
-		
+
 		return "redirect:list";
 	}
 	
-	@RequestMapping(value="/getlist", method={RequestMethod.GET, RequestMethod.POST})
-	public String getList(Model model) {
-		System.out.println("BoardController.getlist");
+	@RequestMapping(value="/read", method= {RequestMethod.GET, RequestMethod.POST})
+	public String read(@RequestParam("no") int no) {
+		System.out.println("boardService.read");
 		
-		List<BoardVo> getlist = boardService.getList();
+		boardService.read(no);
 		
-		model.addAttribute("getList", getlist);
-		return "redirect:list";
+		
+		
+		return "board/read";
+		
 	}
-	
+
 }

@@ -68,13 +68,13 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach var="BoardVo" items="getList">
+							<c:forEach var="boardVo" items="${getList}">
 								<tr>
-									<td>${no}</td>
-									<td class="text-left"><a href="#">${title}</a></td>
-									<td>${name}</td>
-									<td>${hit}</td>
-									<td>2020-12-23</td>
+									<td>${boardVo.no}</td>
+									<td class="text-left"><a href="">${boardVo.title}</a></td>
+									<td>${boardVo.name}</td>
+									<td>${boardVo.hit}</td>
+									<td>${boardVo.regDate}</td>
 									<td><a href="/listDelete">[삭제]</a></td>
 								</tr>
 							</c:forEach>

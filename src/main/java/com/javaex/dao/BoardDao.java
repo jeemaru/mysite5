@@ -27,4 +27,8 @@ public class BoardDao {
 		return sqlSession.selectList("board.getList");
 	}
 	
+	public int read(int no) {
+		return sqlSession.selectOne("board.read", no);
+	}
+	
 }

@@ -25,4 +25,8 @@ public class BoardService {
 	public List<BoardVo> getList() {
 		return boardDao.getList();
 	}
+	
+	public int read(int no) {
+		return boardDao.read(no);
+	}
 }
