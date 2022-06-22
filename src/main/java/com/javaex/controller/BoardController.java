@@ -1,10 +1,14 @@
 package com.javaex.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.BoardService;
 import com.javaex.vo.BoardVo;
@@ -35,7 +39,26 @@ public class BoardController {
 		
 		boardService.write(boardVo);
 		
-		return "redirect:board/list";
+		return "redirect:list";
+	}
+	
+	@RequestMapping(value="/listDelete", method= {RequestMethod.GET,RequestMethod.POST})
+	public String listDelete(@RequestParam("no") int no){
+		System.out.println("BoardController.listDelete");
+		
+		boardService.listDelete(no);
+		
+		return "redirect:list";
+	}
+	
+	@RequestMapping(value="/getlist", method={RequestMethod.GET, RequestMethod.POST})
+	public String getList(Model model) {
+		System.out.println("BoardController.getlist");
+		
+		List<BoardVo> getlist = boardService.getList();
+		
+		model.addAttribute("getList", getlist);
+		return "redirect:list";
 	}
 	
 }

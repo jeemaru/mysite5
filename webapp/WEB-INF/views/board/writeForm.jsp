@@ -65,6 +65,8 @@
 							<a id="btn_cancel" href="list">취소</a>
 							<button id="btn_add" type="submit" >등록</button>
 							
+							<input type="hidden" id="user_no" name="userNo" value="${authUser.no}">
+							 	
 						</form>
 						<!-- //form -->
 					</div>

@@ -1,5 +1,7 @@
 package com.javaex.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,13 @@ public class BoardService {
 	
 	public int write(BoardVo boardVo) {
 		return boardDao.write(boardVo);
+	}
+	
+	public int listDelete(int no) {
+		return boardDao.listDelete(no);
+	}
+	
+	public List<BoardVo> getList() {
+		return boardDao.getList();
 	}
 }
