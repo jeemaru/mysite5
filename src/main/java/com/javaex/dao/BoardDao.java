@@ -21,14 +21,21 @@ public class BoardDao {
 	
 	public int listDelete(int no) {
 		return sqlSession.delete("board.listDelete", no);
+		
 	}
 	
 	public List<BoardVo> getList() {
 		return sqlSession.selectList("board.getList");
+		
 	}
 	
 	public int read(int no) {
 		return sqlSession.selectOne("board.read", no);
+		
 	}
-	
+
+	public List<BoardVo> getBoardList(String keyword){
+		List<BoardVo> boardList = sqlSession.selectList("board.getBoardList", keyword);
+		return boardList;
+	}
 }

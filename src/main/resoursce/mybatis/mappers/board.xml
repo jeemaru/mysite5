@@ -57,6 +57,22 @@
 			]]>
 	</select>
 	
+	<select id="getBoardList" parameterType="String" resultMap="resultMapBoardVo">
+		<![CDATA[
+			sselect b.no,
+			        b.title,
+			        b.content,
+			        b.hit,
+			        b.reg_date regDate,
+			        b.user_no userNo,
+			        u.name userName
+			from board b, users u
+			where b.user_no = u.no
+			and title like '%'||#{value}||'%'
+			order by no desc;
+			]]>
+	</select>
+	
 	
 	
 </mapper>

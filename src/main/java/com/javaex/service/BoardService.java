@@ -29,4 +29,8 @@ public class BoardService {
 	public int read(int no) {
 		return boardDao.read(no);
 	}
+	
+	public List<BoardVo> getBoardList(String keyowrd) {
+		return boardDao.getBoardList(keyowrd);
+	}
 }

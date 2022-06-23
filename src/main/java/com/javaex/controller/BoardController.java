@@ -60,10 +60,21 @@ public class BoardController {
 		System.out.println("boardService.read");
 		
 		boardService.read(no);
-		
-		
-		
+			
 		return "board/read";
+		
+	}
+	
+	@RequestMapping(value="/search", method= {RequestMethod.GET, RequestMethod.POST})
+	public String saerch(@RequestParam("keyword")String keyword, Model model) {
+		System.out.println("boardService.keyword");
+		System.out.println(keyword);
+		
+		List<BoardVo> boardList = boardService.getBoardList(keyword);
+		
+		model.addAllAttributes(boardList);
+		
+		return "board/list";
 		
 	}
 
