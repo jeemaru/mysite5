@@ -14,6 +14,7 @@ public class GuestbookService {
 	@Autowired
 	private GuestbookDao guestbookDao;
 	
+	//전체리스트 가져오기
 	public List<GuestbookVo> getGuestList(){
 		
 		System.out.println("GusetbookService>getGusetList");
@@ -23,10 +24,11 @@ public class GuestbookService {
 		return guestbookList;
 	}
 	
+	
 	//방명록 저장 (ajax)
 	public GuestbookVo addGuest(GuestbookVo guestbookVo) {
-		
 		System.out.println("GuestbookService>addGuest");
+		
 		//저장
 		System.out.println("전-->" + guestbookVo);
 		int count = guestbookDao.insertGuest(guestbookVo);

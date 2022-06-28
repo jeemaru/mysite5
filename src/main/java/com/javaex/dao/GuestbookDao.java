@@ -31,6 +31,7 @@ public class GuestbookDao {
 		System.out.println("쿼리전-->"+guestbookVo); // no x
 		int count = sqlSession.insert("guestbook.insertSelectKey",guestbookVo);
 		System.out.println("쿼리후-->"+guestbookVo); // no o
+		
 		return count;
 	}
 	

@@ -51,7 +51,7 @@
 				<!-- //content-head -->
 
 				<div id="guestbook">
-					<form action="${pageContext.request.contextPath}/api/guestbook/add" method="get">
+					<%-- <form action="${pageContext.request.contextPath}/api/guestbook/add" method="get"> --%>
 						<table id="guestAdd">
 							<colgroup>
 								<col style="width: 70px;">
@@ -76,9 +76,8 @@
 							
 						</table>
 						<!-- //guestWrite -->
-						<input type="hidden" name="action" value="add">
 						
-					</form>	
+					<!-- </form>	 -->
 					
 					
 						<!-- 리스트 영역 -->
@@ -91,42 +90,7 @@
 					
 					
 					
-					<table class="guestRead">
-						<colgroup>
-							<col style="width: 10%;">
-							<col style="width: 40%;">
-							<col style="width: 40%;">
-							<col style="width: 10%;">
-						</colgroup>
-						<tr>
-							<td>1234555</td>
-							<td>이정재</td>
-							<td>2020-03-03 12:12:12</td>
-							<td><a href="">[삭제]</a></td>
-						</tr>
-						<tr>
-							<td colspan=4 class="text-left">방명록 글입니다. 방명록 글입니다.</td>
-						</tr>
-					</table>
-					<!-- //guestRead -->
 					
-					<table class="guestRead">
-						<colgroup>
-								<col style="width: 10%;">
-								<col style="width: 40%;">
-								<col style="width: 40%;">
-								<col style="width: 10%;">
-						</colgroup>
-						<tr>
-							<td>1234555</td>
-							<td>이정재</td>
-							<td>2020-03-03 12:12:12</td>
-							<td><a href="">[삭제]</a></td>
-						</tr>
-						<tr>
-							<td colspan=4 class="text-left">방명록 글입니다. 방명록 글입니다.</td>
-						</tr>
-					</table>	
 					<!-- //guestRead -->
 					
 				</div>
@@ -171,10 +135,12 @@ $("#btnSubmit").on("click", function(){
 	$.ajax({
 		
 		/* url : "${pageContext.request.contextPath }/api/guestbook/add?name="+name+"&password="+password+"&content="+content,	 */
-		url : "${pageContext.request.contextPath }/api/guestbook/add",		
+		url : "${pageContext.request.contextPath}/api/guestbook/add",		
 		type : "post",
 		//contentType : "application/json",
 		data : guestVo,   //파라미터 정리된다
+		
+		
 		dataType : "json",
 		success : function(gVo){
 			/* 1개데이터 리스트 추가(그리기)하기 */
@@ -195,7 +161,7 @@ $("#btnSubmit").on("click", function(){
 function fetchList(){
 	$.ajax({
 		
-		url : "${pageContext.request.contextPath }/api/guestbook/list",		
+		url : "${pageContext.request.contextPath}/api/guestbook/list",		
 		type : "post",
 		//contentType : "application/json",
 		//data : {name: ”홍길동"},
