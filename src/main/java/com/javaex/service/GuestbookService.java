@@ -42,4 +42,20 @@ public class GuestbookService {
 		return gVo;
 	}
 	
+	
+	public String removeGuest(GuestbookVo guestbookVo) {
+		System.out.println("GuestbookService>removeGuest");
+		String state;
+		
+		int count = guestbookDao.guestDelete(guestbookVo);
+		
+		if(count>0) {
+			state = "succeess";
+		}else {
+			state = "fali";
+		}
+		
+		return state;
+		
+	}
 }

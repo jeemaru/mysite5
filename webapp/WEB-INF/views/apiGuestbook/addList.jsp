@@ -9,10 +9,11 @@
 <!-- css -->
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 
 <!-- js -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/css/js/jquery/jquery-1.12.4.js"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
 </head>
 
 <body>
@@ -80,6 +81,9 @@
 					<!-- </form>	 -->
 					
 					
+					<button id="btnTest" class="btn btn-primary">모달창</button>
+					
+					
 						<!-- 리스트 영역 -->
 						<div id="listArea">
 						
@@ -106,6 +110,36 @@
 		<!-- //footer -->
 	</div>
 	<!-- //wrap -->
+
+
+
+
+
+<!-- //////////////////////////모달/////////////////////////////////// -->
+
+<!-- 삭제모달창 -->
+<div id="delModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">비밀번호를 입력하세요</h4>
+      </div>
+      <div class="modal-body">
+      	비밀번호<input type="text" name="password" value="">
+      	<input type="text" name="no" value="">
+        
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+        <button id ="btnModalDel" type="button" class="btn btn-danger">삭제</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 
 </body>
 
@@ -157,6 +191,93 @@ $("#btnSubmit").on("click", function(){
 		}
 	});
 });
+
+/* //테스트 버튼을 눌렀을떄
+$("#btnTest").on("click", function(){
+	
+	console.log("테스트버튼 클릭");
+	
+	//모달창 띄우기
+	$("#delModal").modal("show");
+	
+}); */
+
+
+//삭제버튼을 눌렀을떄
+$("#listArea").on("click", ".btnDel", function(){
+	console.log("삭제버튼");
+	
+	var $this = $(this);
+	var no = $this.data("no");
+	console.log("no");
+	
+	//모델창에 no값 보내기
+	$('#delModal[name="password]"').val("");
+	$('[name="no"]').val(no);
+	
+	
+	//모달창 띄우기
+	$("#delModal").modal("show");
+});
+
+
+//modal창의 삭제버튼을 눌렀을때
+$("#btnModalDel").on("click", function(){
+	console.log("모달창 삭제버튼");
+	//데이터 모으기
+	$('#delModal [name="password"]').val();
+	$('[name="no"]').val();
+	
+	var guestbookVo = {
+		password: password;
+		no: no;
+	};
+	
+	
+	//데이터 모으기 다른방법
+	/* var guestbookVo = {};
+	guestbookVo.password = password;
+	guestbookVo.no = no; */
+	
+	console.log(guestbookVo);
+	//서버로 데이터 전송
+	$.ajax({
+		url : "${pageContext.request.contextPath }/api/guestbook/remove",
+		type : "post",
+		//contentType : "application/json",
+		data : guestbookVo,
+		
+		dataType : "json",
+		success : function(result){
+		/*성공시 처리해야될 코드 작성*/
+			console.(result);
+		
+		//성공이면 지우고, 실패면 안지움	
+		if(result == "succeess"){
+			//지운다
+			$("#t"+no).remove();
+			//모달창 닫기
+			$("#delModal").modal("hide");
+		}else{
+			//모달창 닫기
+			$("#delModal").modal("hide");
+			alert("비밀번호를 확인하세요");
+		}
+		
+
+		},
+		error : function(XHR, status, error) {
+		console.error(status + " : " + error);
+		}
+	});
+
+	
+	
+	//리스트에서 제거하기
+
+	
+});
+
 /* 리스트 요청 */
 function fetchList(){
 	$.ajax({
@@ -183,7 +304,7 @@ function render(guestbookVo, opt){
 	console.log("render()");
 	
 	var str = '';
-	str += '<table class="guestRead">' ;
+	str += '<table id="t'+guestbookVo.no+' " class="guestRead">' ;
 	str += '    <colgroup>' ;
 	str += '        <col style="width: 10%;">' ;
 	str += '        <col style="width: 40%;">' ;
@@ -194,7 +315,7 @@ function render(guestbookVo, opt){
 	str += '        <td>'+guestbookVo.no+'</td>' ;
 	str += '        <td>'+guestbookVo.name+'</td>' ;
 	str += '        <td>'+guestbookVo.regDate+'</td>' ;
-	str += '        <td><a href="">[삭제]</a></td>' ;
+	str += '        <td><button class="btnDel" type="button" data-no="'+guestbookVo.no+'">삭제</td>' ;
 	str += '    </tr>' ;
 	str += '    <tr>' ;
 	str += '        <td colspan=4 class="text-left">'+guestbookVo.content+'</td>' ;

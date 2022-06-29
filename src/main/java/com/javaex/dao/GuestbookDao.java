@@ -42,4 +42,14 @@ public class GuestbookDao {
 		
 		return guestbookVo;
 	}
+	
+	public int guestDelete(GuestbookVo guestbookVo) {
+		System.out.println("GuestbookDao>guestDelete");
+		
+		System.out.println(guestbookVo);
+		
+		return sqlSession.delete("guestbook.delete", guestbookVo);
+		
+		
+	}
 }
