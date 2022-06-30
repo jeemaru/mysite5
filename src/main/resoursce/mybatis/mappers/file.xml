@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="file">
+
+	<resultMap id="resultMapFileVo" type="FileVo">
+		<result column="no" property="no" />
+		<result column="orgname" property="orgName" />
+		<result column="savename" property="saveName" />
+		<result column="filepath" property="filePath" />
+		<result column="filesize" property="fileSize" />
+	</resultMap>
+	
+	<insert id="upload" parameterType="FileVo">
+		<![CDATA[
+			insert into files
+			values(seq_files_no.nextval, #{orgName}, #{saveName}, #{filePath}, #{fileSize})
+		]]>
+	</insert>
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

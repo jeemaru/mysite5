@@ -12,7 +12,7 @@
 <link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 
 <!-- js -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/css/js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
 </head>
 
@@ -150,7 +150,52 @@ $(document).ready(function(){
 	/* 리스트 요청+그리기 */
 	fetchList()
 });
+
+
+ /*
+ $("#btnSubmit").on("click", function(){
+	console.log("저장버튼 클릭");
+	
+	//데이터수집
+	var name = $("[name='name']").val();
+	var password = $("[name='password']").val();
+	var content = $("[name=content]").val();
+	
+	//데이터 객체로 묶기
+	var guestVo = {
+		name: name,
+		password: password,
+		content: content
+	};
+ 
+	$.ajax({
+		//json으로 보내는법
+		url : "${pageContext.request.contextPath}/api/guestbook/add2",		
+		//보낼떄 타입
+		type : "post",
+		contentType : "application/json",
+		data : JSON.stringify(guestVo),   //js 객체를 json문자열로 변경
+		//@requestBody 방식으로 받아야함
+		
+		//받을때 타입
+		dataType : "json",
+		success : function(result){
+			
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
+		}
+	});
+
+	*/
+
+
+
+
+
+
 /* 저장버튼을 클릭했을때 */
+//jquery 파라미터 요청
 $("#btnSubmit").on("click", function(){
 	console.log("저장버튼 클릭");
 	
@@ -229,8 +274,8 @@ $("#btnModalDel").on("click", function(){
 	$('[name="no"]').val();
 	
 	var guestbookVo = {
-		password: password;
-		no: no;
+		password: password,
+		no: no
 	};
 	
 	
@@ -250,7 +295,7 @@ $("#btnModalDel").on("click", function(){
 		dataType : "json",
 		success : function(result){
 		/*성공시 처리해야될 코드 작성*/
-			console.(result);
+			console.log(result);
 		
 		//성공이면 지우고, 실패면 안지움	
 		if(result == "succeess"){

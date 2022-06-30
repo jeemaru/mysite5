@@ -30,9 +30,8 @@ public class GuestbookService {
 		System.out.println("GuestbookService>addGuest");
 		
 		//저장
-		System.out.println("전-->" + guestbookVo);
 		int count = guestbookDao.insertGuest(guestbookVo);
-		System.out.println("후-->" + guestbookVo);
+		System.out.println(guestbookVo);
 		
 		int no =guestbookVo.getNo();
 		
