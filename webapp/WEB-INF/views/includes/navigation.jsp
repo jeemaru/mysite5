@@ -13,7 +13,7 @@
 		<ul class="clearfix">
 			<li><a href="">입사지원서</a></li>
 			<li><a href="list">게시판</a></li>
-			<li><a href="${pageContext.request.contextPath}/board/list">갤러리</a></li>
+			<li><a href="${pageContext.request.contextPath}/galleryList">갤러리</a></li>
 			<li><a href="${pageContext.request.contextPath}/api/guestbook/addList">방명록</a></li>
 		</ul>
 	</div>

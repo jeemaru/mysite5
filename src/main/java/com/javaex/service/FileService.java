@@ -30,9 +30,13 @@ public class FileService {
 		// (1) 파일 정보(DB저장)추출 
 		
 		//오리지날파일명, 저장경로+파일(랜덤)명, 파일사이즈
+		//값 불러와서 오리지널 이름 지정
 		String orgName = file.getOriginalFilename();
 		
 		//확장자
+		//.substring() -->해당값을 리턴함
+		//.lastIndexOf("") --> 뒷부분부터 해당 값이있는 부분부터 리턴함
+		//.IndexOf("") --> 앞부분부터 해당 값이 있는 부분부터 리턴함
 		String exName = orgName.substring(orgName.lastIndexOf(".")); //숫자위치에서부터 잘라냄 //.이 해당되는 부분을 찾음
 		System.out.println(exName);
 		

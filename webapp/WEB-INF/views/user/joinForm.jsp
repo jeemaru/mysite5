@@ -10,6 +10,9 @@
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
 
+<!-- js -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
+
 </head>
 
 <body>
@@ -51,7 +54,7 @@
 	
 				<div id="user">
 					<div id="joinForm">
-						<form action="userSearch" method="get">
+						<form id="join-form" action="userSearch" method="get">
 							<input type="hidden" name="action" value="join">
 						
 							<!-- 아이디 -->
@@ -116,5 +119,37 @@
 	<!-- //wrap -->
 
 </body>
+
+
+<script type="text/javascript">
+$("#join-form").on("submit", function(){
+	console.log("회원가입버튼 클릭");
+	
+	var id = $("#input-uid").val();
+	var password = $("#input-pass").val();
+	
+	if(id == "" || id == null){
+		alert("아이디를 입력해주세요");
+		return false;
+	}
+	
+	if(password == "" || password == null){
+		alert("비밀번호를 입력해주세요");
+		return false;
+	}
+	
+	//약관동의
+ 	var agree = $("#chk-agree").is(":checked");
+		
+	if(agree == false){
+		alert("약관에 동의해주세요")
+		return false;
+	}
+});
+
+</script>
+
+
+
 
 </html>
