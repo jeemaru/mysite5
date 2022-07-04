@@ -27,7 +27,7 @@
 		        u.name name
 		from gallery g, users u
 		where g.user_no = u.no
-		order by no desc;
+		order by g.no desc
 	]]>
 	
 	</select>

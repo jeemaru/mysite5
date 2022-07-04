@@ -58,12 +58,15 @@
 					</c:if>
 			
 					<ul id="viewArea">
-						<c:forEach var="GalleryVo" items="${getList}">
+						<c:forEach var="GalleryVo" items="${getlist}">
 						<!-- 이미지반복영역 -->
 							<li>
-								<div class="view" >
-									<img class="imgItem" src="${filePath}">
-									<div class="imgWriter">작성자: <strong>${sessionScope.authUser}</strong></div>
+								<div class="view" data-userName="${galleryVo.name}" 
+												  data-userNo="${galleryVo.userNo}"
+												  data-content="${galleryVo.content}"
+												  data-no="${galleryVo.no}">
+									<img class="imgItem" src="${pageContext.request.contextPath}/upload/${galleryVo.saveName}">
+									<div class="imgWriter">작성자: <strong>${galleryVo.name}</strong></div>
 								</div>
 							</li>
 						<!-- 이미지반복영역 -->
@@ -95,11 +98,12 @@
 					<h4 class="modal-title">이미지등록</h4>
 				</div>
 				
-				<form method="post" action="galleryInsert" enctype="multipart/form-data" >
+				<form method="post" action="${pageContext.request.contextPath}/galleryInsert" enctype="multipart/form-data" >
 					<div class="modal-body">
 						<div class="form-group">
 							<label class="form-text">글작성</label>
 							<input id="addModalContent" type="text" name="content" value="" >
+							<input type="hidden" name="userNo" value="${authUser.no}">
 						</div>
 						<div class="form-group">
 							<label class="form-text">이미지선택</label>
@@ -166,12 +170,16 @@ $("#btnUpload").on("click", function(){
 	console.log("이미지등록");
 	
 	var content = $("[name='name']").val();
+	console.log(content);
 	var orgName = $("[name='orgName']").val();
+	console.log(orgName);
+	var userNo = $("[name='userNo']").val();
+	console.log(userNo);
 	
 	var GalleryVo ={
 		content: content,
-		orgName: orgName
-			
+		orgName: orgName,
+		userNo: userNo	
 	};
 	
 });

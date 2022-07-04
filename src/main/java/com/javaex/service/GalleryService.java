@@ -20,14 +20,14 @@ public class GalleryService {
 	@Autowired
 	private GalleryDao galleryDao;
 	
-	public List<GalleryVo> gallerylist(GalleryVo galleryVo){
+	public List<GalleryVo> gallerylist(){
 		
-		return galleryDao.gallerylist(galleryVo);
+		return galleryDao.gallerylist();
 	}
 	
 	
 	
-	public String galleryInsert(MultipartFile file) {
+	public String galleryInsert(MultipartFile file, String content, int userNo) {
 		System.out.println("GalleryService>galleryInsert");
 		System.out.println(file.getOriginalFilename());
 		
@@ -35,8 +35,6 @@ public class GalleryService {
 		String saveDir = "C:\\javaStudy\\upload";
 		
 		String orgName = file.getOriginalFilename();
-		
-		String content = null;
 		
 		String exName = orgName.substring(orgName.lastIndexOf("."));
 		System.out.println(exName);
@@ -48,7 +46,7 @@ public class GalleryService {
 		long fileSize = file.getSize();
 		
 		
-		GalleryVo GalleryVo = new GalleryVo(content, filePath, orgName, saveName, fileSize);
+		GalleryVo GalleryVo = new GalleryVo(userNo, content, filePath, orgName, saveName, fileSize);
 		System.out.println(GalleryVo);
 		
 		galleryDao.galleryInsert(GalleryVo);

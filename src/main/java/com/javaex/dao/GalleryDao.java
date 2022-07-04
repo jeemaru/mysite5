@@ -14,9 +14,11 @@ public class GalleryDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<GalleryVo> gallerylist(GalleryVo galleryVo){
+	public List<GalleryVo> gallerylist(){
 		
-		return sqlSession.selectList("gallery.gallerylist", galleryVo);
+		List<GalleryVo> getList = sqlSession.selectList("gallery.gallerylist");
+		
+		return getList;
 	}
 	
 	
