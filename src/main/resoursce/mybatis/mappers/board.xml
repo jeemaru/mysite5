@@ -29,15 +29,35 @@
 	
 	<select id="getList" resultMap="resultMapBoardVo" >
 		<![CDATA[
-			select  b.no no,
-					b.user_no userNo,
-					b.title title,
-					b.hit hit,
-					b.reg_date regDate,
-					u.name name
-			from board b, users u
-			where b.user_no = u.no
-			order by b.no desc
+			select  ort.rn,
+			        ort.no,
+			        ort.userNo,
+			        ort.title,
+			        ort.hit,
+			        ort.regDate,
+			        ort.name,
+			        ort.content
+			from (select rownum rn,
+			             ot.no,
+			             ot.userNo,
+			             ot.title,
+			             ot.hit,
+			             ot.regDate,
+			             ot.name,
+			             ot.content
+			    from (select  b.no no,
+			                  b.user_no userNo,
+			                  b.title title,
+			                  b.hit hit,
+			                  b.reg_date regDate,
+			                  u.name name,
+			                  b.content content
+			        from board b, users u
+			        where b.user_no = u.no
+			        order by b.no desc) ot
+			    ) ort
+			where rn >= #{startRnum}                
+			and rn <= #{endRnum}
 			]]>
 	</select>
 	
@@ -57,7 +77,7 @@
 			]]>
 	</select>
 	
-	<select id="getBoardList" parameterType="String" resultMap="resultMapBoardVo">
+	<!-- <select id="getBoardList" parameterType="String" resultMap="resultMapBoardVo">
 		<![CDATA[
 			sselect b.no,
 			        b.title,
@@ -69,10 +89,52 @@
 			from board b, users u
 			where b.user_no = u.no
 			and title like '%'||#{value}||'%'
-			order by no desc;
+			order by no desc
+			]]>
+	</select> -->
+	
+	<select id="getBoardList4" parameterType="String" resultMap="resultMapBoardVo">
+		<![CDATA[
+			select  ort.rn,
+			        ort.no,
+			        ort.userNo,
+			        ort.title,
+			        ort.hit,
+			        ort.regDate,
+			        ort.name,
+			        ort.content
+			from (select rownum rn,
+			             ot.no,
+			             ot.userNo,
+			             ot.title,
+			             ot.hit,
+			             ot.regDate,
+			             ot.name,
+			             ot.content
+			    from (select  b.no no,
+			                  b.user_no userNo,
+			                  b.title title,
+			                  b.hit hit,
+			                  b.reg_date regDate,
+			                  u.name name,
+			                  b.content content
+			        from board b, users u
+			        where b.user_no = u.no
+			        order by b.no desc) ot
+			    ) ort
+			where rn >= #{startRnum}                
+			and rn <= #{endRnum}
 			]]>
 	</select>
 	
+	
+	<select id="selectTotalCnt" resultType="int" >
+		<![CDATA[
+			select  count(*) count
+			from board b, user u
+			where b.user_no = u.no
+			]]>
+	</select>
 	
 	
 </mapper>
